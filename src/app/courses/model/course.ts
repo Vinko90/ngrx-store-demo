@@ -1,4 +1,3 @@
-
 export interface Course {
   id: number;
   seqNo:number;
@@ -11,7 +10,6 @@ export interface Course {
   lessonsCount: number;
   promo: boolean;
 }
-
 
 export function compareCourses(c1:Course, c2: Course) {
 

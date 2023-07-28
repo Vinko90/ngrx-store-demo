@@ -15,12 +15,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthModule} from './auth/auth.module';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {environment} from '../environments/environment';
-import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 
-import {EffectsModule} from '@ngrx/effects';
-import {EntityDataModule} from '@ngrx/data';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {reducers} from "./store/app.reducer";
 
 
 const routes: Routes = [
@@ -33,7 +30,6 @@ const routes: Routes = [
     redirectTo: '/'
   }
 ];
-
 
 
 @NgModule({
@@ -52,7 +48,7 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     AuthModule.forRoot(),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   bootstrap: [AppComponent]

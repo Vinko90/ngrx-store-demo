@@ -1,5 +1,3 @@
-
-
 export interface Lesson {
     id: number;
     description: string;
@@ -7,7 +5,6 @@ export interface Lesson {
     seqNo: number;
     courseId: number;
 }
-
 
 export function compareLessons(l1:Lesson, l2: Lesson) {
 
