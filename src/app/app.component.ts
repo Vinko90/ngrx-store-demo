@@ -21,6 +21,11 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
 
+      const userProfile = localStorage.getItem('user');
+      if(userProfile) {
+        this.store.dispatch(authActions.loginAction({user: JSON.parse(userProfile)}));
+      }
+
       this.router.events.subscribe(event  => {
         switch (true) {
           case event instanceof NavigationStart: {
