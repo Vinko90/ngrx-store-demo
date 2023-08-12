@@ -1,10 +1,5 @@
-
-
 import {Request, Response} from 'express';
 import {authenticate} from "./db-data";
-
-
-
 
 export function loginUser(req: Request, res: Response) {
 
@@ -20,7 +15,4 @@ export function loginUser(req: Request, res: Response) {
     else {
         res.sendStatus(403);
     }
-
 }
-
-

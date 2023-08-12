@@ -1,12 +1,20 @@
 import {EntityMetadataMap} from "@ngrx/data";
 import {compareCourses} from "../model/course";
+import {compareLessons} from "../model/lesson";
 
 export const courseEntityName: string = 'Course';
+export const lessonEntityName: string = 'Lesson';
 
 //Define all the entities
 export const entityMetadata: EntityMetadataMap = {
   Course: {
-    sortComparer: compareCourses
+    sortComparer: compareCourses,
+    entityDispatcherOptions: {
+      optimisticUpdate: true
+    }
+  },
+  Lesson: {
+    sortComparer: compareLessons
   }
 };
 

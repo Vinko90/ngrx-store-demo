@@ -24,6 +24,4 @@ export function createCourse(req: Request, res: Response) {
       res.status(200).json(newCourse);
 
     }, 2000);
-
 }
-

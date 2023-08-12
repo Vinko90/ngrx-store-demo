@@ -3,10 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Course} from '../model/course';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {CourseState} from "../store/course.reducers";
-import {Store} from "@ngrx/store";
-import {Update} from "@ngrx/entity";
-import {courseUpdatedAction} from "../store/course.actions";
+import {CourseEntityService} from "../services/course-entity.service";
 
 @Component({
   selector: 'course-dialog',
@@ -25,7 +22,7 @@ export class EditCourseDialogComponent {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
-    private store: Store<CourseState>) {
+    private courseService: CourseEntityService) {
 
     this.dialogTitle = data.dialogTitle;
     this.course = data.course;
@@ -56,18 +53,20 @@ export class EditCourseDialogComponent {
   }
 
   onSave() {
-
     const course: Course = {
       ...this.course,
       ...this.form.value
     };
 
-    const update: Update<Course> = {
-      id: course.id,
-      changes: course
-    };
-
-    this.store.dispatch(courseUpdatedAction({update}));
-    this.dialogRef.close();
+    if (this.mode === 'update') {
+      this.courseService.update(course);
+      this.dialogRef.close();
+    }
+    else if (this.mode === 'create') {
+      this.courseService.add(course).subscribe(newCourse => {
+        console.log("New Course Created: ", newCourse);
+        this.dialogRef.close();
+      });
+    }
   }
 }

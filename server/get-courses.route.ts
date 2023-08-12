@@ -1,8 +1,5 @@
-
-
 import {Request, Response} from 'express';
 import {COURSES} from "./db-data";
-
 
 
 export function getAllCourses(req: Request, res: Response) {
@@ -14,11 +11,7 @@ export function getAllCourses(req: Request, res: Response) {
       res.status(200).json({payload:Object.values(COURSES)});
 
     }, 1000);
-
-
-
 }
-
 
 export function getCourseByUrl(req: Request, res: Response) {
 
@@ -33,6 +26,4 @@ export function getCourseByUrl(req: Request, res: Response) {
       res.status(200).json(course);
 
     }, 1000);
-
-
 }
