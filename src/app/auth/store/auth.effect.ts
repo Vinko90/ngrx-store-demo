@@ -13,7 +13,7 @@ export class AuthEffect {
   ), {dispatch: false});
 
   logout$ = createEffect(() => this.actions$.pipe(ofType(AuthActions.logoutAction),
-    tap(action => {
+    tap(() => {
       localStorage.removeItem('user');
       this.router.navigateByUrl('/login');
     })), {dispatch: false});
