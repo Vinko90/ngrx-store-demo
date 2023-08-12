@@ -26,6 +26,10 @@ import {EffectsModule} from "@ngrx/effects";
 import {CourseEffects} from "./store/course.effects";
 import {StoreModule} from "@ngrx/store";
 import {courseFeatureKey, courseReducer} from "./store/course.reducers";
+import {EntityDataService, EntityDefinitionService} from "@ngrx/data";
+import {CourseEntityService} from "./services/course-entity.service";
+import {CoursesDataService} from "./services/courses-data.service";
+import {courseEntityName, entityMetadata} from "./store/course.entities";
 
 export const coursesRoutes: Routes = [
   {
@@ -37,10 +41,12 @@ export const coursesRoutes: Routes = [
   },
   {
     path: ':courseUrl',
-    component: CourseComponent
+    component: CourseComponent,
+    resolve: {
+      courses: CoursesResolver
+    }
   }
 ];
-
 
 @NgModule({
   imports: [
@@ -78,9 +84,16 @@ export const coursesRoutes: Routes = [
   ],
   providers: [
     CoursesHttpService,
-    CoursesResolver
+    CoursesResolver,
+    CourseEntityService,
+    CoursesDataService
   ]
 })
 export class CoursesModule {
-  constructor() { }
+  constructor(eds: EntityDefinitionService,
+              entityDataService: EntityDataService,
+              courseDataService: CoursesDataService) {
+    eds.registerMetadataMap(entityMetadata);
+    entityDataService.registerService(courseEntityName, courseDataService);
+  }
 }
