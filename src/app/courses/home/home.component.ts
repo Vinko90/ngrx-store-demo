@@ -15,16 +15,15 @@ import * as courseSelectors from "../store/course.selectors";
 })
 export class HomeComponent implements OnInit {
 
-    promoTotal$: Observable<number>;
-    loading$: Observable<boolean>;
-    beginnerCourses$: Observable<Course[]>;
-    advancedCourses$: Observable<Course[]>;
+  promoTotal$: Observable<number>;
+  beginnerCourses$: Observable<Course[]>;
+  advancedCourses$: Observable<Course[]>;
 
-    constructor(private dialog: MatDialog, private store: Store<CourseState>) { }
+  constructor(private dialog: MatDialog, private store: Store<CourseState>) { }
 
-    ngOnInit() {
-      this.reload();
-    }
+  ngOnInit() {
+    this.reload();
+  }
 
   reload() {
     this.beginnerCourses$ = this.store.pipe(select(courseSelectors.selectBeginnerCourses));
