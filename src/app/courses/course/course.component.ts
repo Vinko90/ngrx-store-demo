@@ -53,7 +53,7 @@ export class CourseComponent implements OnInit {
       'courseId': course.id.toString(),
       'sortOrder': 'asc',
       'pageNumber': this.nextPage.toString(),
-      'pageSize': 3
+      'pageSize': '3'
     });
 
     this.nextPage += 1;
